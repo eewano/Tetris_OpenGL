@@ -36,6 +36,7 @@ public:
     bool mExists[FIELD_HEIGHT][FIELD_WIDTH];
     bool mToBeDropped = false;
     bool mToBeRotated = false;
+    int playerScore = 0;
     
 private:
     int mDropCount = 0;

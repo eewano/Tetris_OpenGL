@@ -38,7 +38,6 @@ GLuint nextTextId;
 GLuint scoreId;
 GLuint blockId;
 
-GLint playerScore = 0;
 bool gameIsOver = false;
 
 void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -53,7 +52,7 @@ void ProcessGameover();
 
 
 
-//----------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 int main(int argc, const char * argv[]) {
     
     if(LibraryInit() == -1)
@@ -118,7 +117,7 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
-//----------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 
 
@@ -214,7 +213,7 @@ void ProcessInput()
         if(gameManager->IsMovable(*currentMino, 0, -1) == true)
         {
             currentMino->Move({ 0, -1 });
-            playerScore += DROP_SCORE;
+            gameManager->playerScore += DROP_SCORE;
         }
     }
 }
@@ -252,14 +251,14 @@ void DropMino()
 
 void ScoreCheck()
 {
-    if(playerScore > 9990)
+    if(gameManager->playerScore > 9990)
     {
-        playerScore = 9990;
+        gameManager->playerScore = 9990;
     }
     
-    scoreDigit02->Update(playerScore / 10);
-    scoreDigit03->Update(playerScore / 100);
-    scoreDigit04->Update(playerScore / 1000);
+    scoreDigit02->Update(gameManager->playerScore / 10);
+    scoreDigit03->Update(gameManager->playerScore / 100);
+    scoreDigit04->Update(gameManager->playerScore / 1000);
 }
 
 void Draw()

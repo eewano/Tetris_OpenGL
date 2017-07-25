@@ -115,6 +115,7 @@ void GameManager::PlaceCurrent(const TetriMino& mino)
 void GameManager::DeleteLines()
 {
     int targetLine = SENTINELS_COUNT;
+    int deleteCount = 0;
     
     for(int i = SENTINELS_COUNT; i < FIELD_HEIGHT; i++)
     {
@@ -123,6 +124,31 @@ void GameManager::DeleteLines()
         {
             targetLine++;
         }
+        else
+        {
+            deleteCount++;
+        }
+    }
+    
+    switch(deleteCount)
+    {
+        case 0:
+            break;
+        case 1:
+            playerScore += 50;
+            break;
+        case 2:
+            playerScore += 100;
+            break;
+        case 3:
+            playerScore += 300;
+            break;
+        case 4:
+            playerScore += 800;
+            break;
+        default:
+            std::cout << "Unknown deleteCount.\n";
+            break;
     }
 }
 
