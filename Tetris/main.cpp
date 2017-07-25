@@ -78,7 +78,11 @@ int main(int argc, const char * argv[]) {
     
     gameManager = std::make_unique<GameManager>();
     currentMino = std::make_unique<TetriMino>(Vec2i{ FIELD_WIDTH / 2, FIELD_HEIGHT });
-    nextMino = std::make_unique<TetriMino>(Vec2i{ 19, 5 });
+    nextMino = std::make_unique<TetriMino>(Vec2i{ FIELD_WIDTH / 2, FIELD_HEIGHT });
+    
+    //ここで次に出るテトリミノのタイプと位置を設定しておく
+    nextMino->SetType(currentMino->mNextType);
+    nextMino->SetPosition(Vec2i{ NEXT_TETRIMINO_POS.x, NEXT_TETRIMINO_POS.y });
     
     while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
           glfwWindowShouldClose(window) == 0)
@@ -212,8 +216,12 @@ void DropMino()
                 blockList[pos.y][pos.x]->SetColor(currentMino->blockTypes[currentMino->mType].color);
             }
             
-            currentMino->UpdateNextType();
+            //設置したら次のテトリミノに変更して出現ポイントに移動する
             currentMino->ResetAndNext(currentMino->GetNextType());
+            currentMino->UpdateNextType();
+            //ネクストテトリミノを更新する
+            nextMino->SetType(currentMino->mNextType);
+            nextMino->SetPosition(Vec2i{ NEXT_TETRIMINO_POS.x, NEXT_TETRIMINO_POS.y });
         }
         gameManager->mToBeDropped = false;
     }

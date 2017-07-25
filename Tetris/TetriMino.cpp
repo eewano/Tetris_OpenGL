@@ -43,7 +43,7 @@ TetriMino::TetriMino(Vec2i aPos)
 {
     //mNextTypeは0で初期化されていないので、コンストラクタ生成時にテトリミノの
     //タイプを予め設定しておかないとcassertに引っ掛かる事がある
-    UpdateNextType();
+    mNextType = xorShift(BLOCK_TYPE_MAX);
     
     //Blockを4つ組み合わせる
     for(size_t i = 0; i < BLOCK_MAX; i++)

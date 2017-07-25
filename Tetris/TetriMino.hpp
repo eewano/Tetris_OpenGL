@@ -11,6 +11,7 @@ struct BlockType;
 
 static const int BLOCK_TYPE_MAX = 7;
 static const int BLOCK_MAX = 4;
+static const Vec2i NEXT_TETRIMINO_POS = { 19, 4 };
 
 class TetriMino
 {
