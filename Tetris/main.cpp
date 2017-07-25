@@ -38,6 +38,7 @@ GLuint nextTextId;
 GLuint scoreId;
 GLuint blockId;
 
+GLint playerScore = 0;
 bool gameIsOver = false;
 
 void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -46,6 +47,7 @@ int LibraryInit();
 void SetUpBmp();
 void ProcessInput();
 void DropMino();
+void ScoreCheck();
 void Draw();
 void ProcessGameover();
 
@@ -104,6 +106,7 @@ int main(int argc, const char * argv[]) {
         input.Update();
         input.ResetNow();
         
+        ScoreCheck();
         Draw();
         
         glfwSwapBuffers(window);
@@ -206,6 +209,14 @@ void ProcessInput()
             }
         }
     }
+    else if(input.GetButtonDown(GLFW_KEY_S))
+    {
+        if(gameManager->IsMovable(*currentMino, 0, -1) == true)
+        {
+            currentMino->Move({ 0, -1 });
+            playerScore += DROP_SCORE;
+        }
+    }
 }
 
 void DropMino()
@@ -237,6 +248,18 @@ void DropMino()
         }
         gameManager->mToBeDropped = false;
     }
+}
+
+void ScoreCheck()
+{
+    if(playerScore > 9990)
+    {
+        playerScore = 9990;
+    }
+    
+    scoreDigit02->Update(playerScore / 10);
+    scoreDigit03->Update(playerScore / 100);
+    scoreDigit04->Update(playerScore / 1000);
 }
 
 void Draw()
