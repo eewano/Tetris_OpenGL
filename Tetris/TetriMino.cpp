@@ -41,6 +41,8 @@ TetriMino::TetriMino()
 
 TetriMino::TetriMino(Vec2i aPos)
 {
+    //mNextTypeは0で初期化されていないので、コンストラクタ生成時にテトリミノのタイプを
+    //設定しておかないとcassertに引っ掛かる事がある
     UpdateNextType();
     
     //Blockを4つ組み合わせる
@@ -96,6 +98,34 @@ void TetriMino::UpdateNextType()
 void TetriMino::Move(const Vec2i &amount)
 {
     mPosition += amount;
+    SetPosition(mPosition);
+}
+
+void TetriMino::RotateLeft()
+{
+    if(blockTypes->isRotatable == true)
+    {
+        for(size_t i = 0; i < BLOCK_MAX; i++)
+        {
+            auto temp = mBlocks[i]->mOffset;
+            mBlocks[i]->mOffset.x = -temp.y;
+            mBlocks[i]->mOffset.y = temp.x;
+        }
+    }
+    SetPosition(mPosition);
+}
+
+void TetriMino::RotateRight()
+{
+    if(blockTypes->isRotatable == true)
+    {
+        for(size_t i = 0; i < BLOCK_MAX; i++)
+        {
+            auto temp = mBlocks[i]->mOffset;
+            mBlocks[i]->mOffset.x = temp.y;
+            mBlocks[i]->mOffset.y = -temp.x;
+        }
+    }
     SetPosition(mPosition);
 }
 

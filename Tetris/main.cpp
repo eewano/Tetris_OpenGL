@@ -171,6 +171,20 @@ void ProcessInput()
             currentMino->Move({ +1, 0 });
         }
     }
+    else if(input.GetButtonDown(GLFW_KEY_K))
+    {
+        if(gameManager->IsRotatableLeft(*currentMino))
+        {
+            currentMino->RotateLeft();
+        }
+    }
+    else if(input.GetButtonDown(GLFW_KEY_L))
+    {
+        if(gameManager->IsRotatableRight(*currentMino))
+        {
+            currentMino->RotateRight();
+        }
+    }
 }
 
 void DropMino()

@@ -69,6 +69,32 @@ bool GameManager::IsMovable(const TetriMino &mino, int horizontal, int vertical)
     return true;
 }
 
+bool GameManager::IsRotatableLeft(const TetriMino &mino)
+{
+    for(size_t i = 0; i < BLOCK_MAX; i++)
+    {
+        auto temp = mino.mBlocks[i]->mOffset;
+        if(mExists[ mino.mPosition.y + temp.x ][ mino.mPosition.x + (-temp.y) ] == true)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool GameManager::IsRotatableRight(const TetriMino &mino)
+{
+    for(size_t i = 0; i < BLOCK_MAX; i++)
+    {
+        auto temp = mino.mBlocks[i]->mOffset;
+        if(mExists[ mino.mPosition.y + (-temp.x) ][ mino.mPosition.x + temp.y ] == true)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 void GameManager::PlaceCurrent(const Block& block)
 {
     mExists[block.mPosition.y][block.mPosition.x] = true;

@@ -25,8 +25,9 @@ public:
     void ResetAndNext(int type);
     void UpdateNextType();
     void Move(const Vec2i& amount);
+    void RotateLeft();
+    void RotateRight();
     void Draw(int texId);
-    void Rotate();
     
     int GetNextType() const;
     

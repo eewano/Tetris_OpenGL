@@ -8,7 +8,7 @@
 static const int SENTINELS_COUNT = 1;
 static const int FIELD_WIDTH = 10 + SENTINELS_COUNT * 2;
 static const int FIELD_HEIGHT = 20 + SENTINELS_COUNT * 2;
-static const int DROP_INTERVAL = 10;
+static const int DROP_INTERVAL = 15;
 
 static Vec2i FIELD_SIZE = { FIELD_WIDTH, FIELD_HEIGHT };
 static Vec2f FIELD_BOT_LEFT = { -0.55f, -0.475f };
@@ -23,6 +23,8 @@ public:
     void Process();
     bool IsMovable(const Block& block, int horizontal, int vertical);
     bool IsMovable(const TetriMino& mino, int horizontal, int vertical);
+    bool IsRotatableLeft(const TetriMino& mino);
+    bool IsRotatableRight(const TetriMino& mino);
     void PlaceCurrent(const Block& block);
     void PlaceCurrent(const TetriMino& mino);
     bool IsGameOver();
