@@ -38,6 +38,8 @@ GLuint nextTextId;
 GLuint scoreId;
 GLuint blockId;
 
+bool gameIsOver = false;
+
 void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 int LibraryInit();
@@ -45,6 +47,7 @@ void SetUpBmp();
 void ProcessInput();
 void DropMino();
 void Draw();
+void ProcessGameover();
 
 
 
@@ -87,9 +90,16 @@ int main(int argc, const char * argv[]) {
     while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
           glfwWindowShouldClose(window) == 0)
     {
-        gameManager->Process();
-        ProcessInput();
-        DropMino();
+        if(gameManager->IsGameOver() == true)
+        {
+            ProcessGameover();
+        }
+        else
+        {
+            gameManager->Process();
+            ProcessInput();
+            DropMino();
+        }
         
         input.Update();
         input.ResetNow();
@@ -255,4 +265,21 @@ void Draw()
     
     currentMino->Draw(blockId);
     nextMino->Draw(blockId);
+}
+
+void ProcessGameover()
+{
+    if(gameIsOver == false)
+    {
+        for(int i = 0; i < FIELD_SIZE.y; i++)
+        {
+            for(int j = 0; j < FIELD_SIZE.x; j++)
+            {
+                blockList[i][j]->SetColor({ 0.4f, 0.4f, 0.4f, 1.0f });
+            }
+        }
+        
+        std::cout << "Game is over !\n";
+        gameIsOver = true;
+    }
 }

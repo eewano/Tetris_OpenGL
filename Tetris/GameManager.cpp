@@ -136,10 +136,16 @@ void GameManager::MoveLine(int from, int to)
 
 bool GameManager::IsGameOver()
 {
-    return true;
+    //エラー防止の為、[最上段 - 1]の中央4マスにブロックが置かれたらゲームオーバー
+    for(size_t i = (FIELD_WIDTH / 2) - 1; i < (FIELD_WIDTH / 2) + 1; i++)
+    {
+        if(mExists[ FIELD_HEIGHT - SENTINELS_COUNT - 1 ][i] == true)
+        {
+            return true;
+        }
+    }
+    return false;
 }
-
-
 
 bool GameManager::IsLineFilled(int y)
 {

@@ -9,7 +9,7 @@ static const int SENTINELS_COUNT = 1;
 //SENTINELS_COUNT: 両側の壁や床
 static const int FIELD_WIDTH = 10 + SENTINELS_COUNT * 2;
 static const int FIELD_HEIGHT = 20 + SENTINELS_COUNT * 2;
-static const int DROP_INTERVAL = 10;
+static const int DROP_INTERVAL = 8;
 
 static Vec2i FIELD_SIZE = { FIELD_WIDTH, FIELD_HEIGHT };
 static Vec2f FIELD_BOT_LEFT = { -0.55f, -0.475f };
