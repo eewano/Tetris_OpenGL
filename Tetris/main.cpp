@@ -216,6 +216,8 @@ void DropMino()
                 blockList[pos.y][pos.x]->SetColor(currentMino->blockTypes[currentMino->mType].color);
             }
             
+            gameManager->DeleteLines();
+            
             //設置したら次のテトリミノに変更して出現ポイントに移動する
             currentMino->ResetAndNext(currentMino->GetNextType());
             currentMino->UpdateNextType();

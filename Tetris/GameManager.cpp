@@ -112,6 +112,20 @@ void GameManager::PlaceCurrent(const TetriMino& mino)
     }
 }
 
+void GameManager::DeleteLines()
+{
+    int targetLine = SENTINELS_COUNT;
+    
+    for(int i = SENTINELS_COUNT; i < FIELD_HEIGHT; i++)
+    {
+        MoveLine(i, targetLine);
+        if(IsLineFilled(i) == false)
+        {
+            targetLine++;
+        }
+    }
+}
+
 void GameManager::MoveLine(int from, int to)
 {
     for(size_t i = SENTINELS_COUNT; i < FIELD_WIDTH - SENTINELS_COUNT; i++)
@@ -127,7 +141,14 @@ bool GameManager::IsGameOver()
 
 
 
-bool GameManager::IsLineFilled()
+bool GameManager::IsLineFilled(int y)
 {
+    for(size_t i = SENTINELS_COUNT; i < FIELD_WIDTH - SENTINELS_COUNT; i++)
+    {
+        if(mExists[y][i] == false)
+        {
+            return false;
+        }
+    }
     return true;
 }

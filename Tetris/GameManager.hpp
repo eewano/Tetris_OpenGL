@@ -6,6 +6,7 @@
 #include "TetriMino.hpp"
 
 static const int SENTINELS_COUNT = 1;
+//SENTINELS_COUNT: 両側の壁や床
 static const int FIELD_WIDTH = 10 + SENTINELS_COUNT * 2;
 static const int FIELD_HEIGHT = 20 + SENTINELS_COUNT * 2;
 static const int DROP_INTERVAL = 10;
@@ -27,6 +28,7 @@ public:
     bool IsRotatableRight(const TetriMino& mino);
     void PlaceCurrent(const Block& block);
     void PlaceCurrent(const TetriMino& mino);
+    void DeleteLines();
     bool IsGameOver();
     
 public:
@@ -36,7 +38,7 @@ public:
     
 private:
     int mDropCount = 0;
-    bool IsLineFilled();
+    bool IsLineFilled(int y);
     void MoveLine(int from, int to);
 };
 
