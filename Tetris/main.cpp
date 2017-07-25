@@ -173,6 +173,7 @@ void ProcessInput()
     }
     else if(input.GetButtonDown(GLFW_KEY_K))
     {
+        //四角タイプのテトリミノ(mType=2)だけは回転を受け付けない
         if(currentMino->mType != 2)
         {
             if(gameManager->IsRotatableLeft(*currentMino))

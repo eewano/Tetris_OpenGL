@@ -43,7 +43,6 @@ struct BlockType
 {
     Vec2i offset[BLOCK_MAX];
     Vec4f color;
-    bool isRotatable;
 };
 
 #endif /* TetriMino_hpp */

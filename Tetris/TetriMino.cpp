@@ -8,31 +8,31 @@ BlockType TetriMino::blockTypes[BLOCK_TYPE_MAX] =
 {
     //minoTypes[0] 凸タイプ ピンク
     { { Vec2i{ 0, 0 }, Vec2i{ 0, -1 }, Vec2i{ -1, 0 }, Vec2i{ +1, 0 } },
-        { 1.0f, 0.0f, 1.0f, 1.0f }, true },
+        { 1.0f, 0.0f, 1.0f, 1.0f } },
     
     //minoTypes[1] 棒タイプ ライトブルー
     { { Vec2i{ 0, 0 }, Vec2i{ 0, -1 }, Vec2i{ 0, -2 }, Vec2i{ 0, +1 } },
-        { 0.0f, 1.0f, 1.0f, 1.0f }, true },
+        { 0.0f, 1.0f, 1.0f, 1.0f } },
     
     //minoTypes[2] 四角タイプ イエロー
     { { Vec2i{ 0, 0 }, Vec2i{ +1, 0 }, Vec2i{ 0, -1 }, Vec2i{ +1, -1 } },
-        { 1.0f, 1.0f, 0.0f, 1.0f }, false },
+        { 1.0f, 1.0f, 0.0f, 1.0f } },
     
     //minoTypes[3] Lタイプ ホワイト
     { { Vec2i{ 0, 0 }, Vec2i{ 0, +1 }, Vec2i{ 0, -1 }, Vec2i{ +1, -1 } },
-        { 1.0f, 1.0f, 1.0f, 1.0f }, true },
+        { 1.0f, 1.0f, 1.0f, 1.0f } },
     
     //minoTypes[4] 逆Lタイプ ブルー
     { { Vec2i{ 0, 0 }, Vec2i{ 0, +1 }, Vec2i{ 0, -1 }, Vec2i{ -1, -1 } },
-        { 0.0f, 0.0f, 1.0f, 1.0f }, true },
+        { 0.0f, 0.0f, 1.0f, 1.0f } },
     
     //minoTypes[5] 右ズレタイプ イエローグリーン
     { { Vec2i{ 0, 0 }, Vec2i{ +1, 0 }, Vec2i{ 0, -1 }, Vec2i{ -1, -1 } },
-        { 0.0f, 1.0f, 0.0f, 1.0f }, true },
+        { 0.0f, 1.0f, 0.0f, 1.0f } },
     
     //minoTypes[6] 左ズレタイプ レッド
     { {Vec2i{ 0, 0 }, Vec2i{ -1, 0 }, Vec2i{ 0, -1 }, Vec2i{ +1, -1 } },
-        { 1.0f, 0.0f, 0.0f, 1.0f }, true }
+        { 1.0f, 0.0f, 0.0f, 1.0f } }
 };
 
 TetriMino::TetriMino()
@@ -103,28 +103,22 @@ void TetriMino::Move(const Vec2i &amount)
 
 void TetriMino::RotateLeft()
 {
-    if(blockTypes->isRotatable == true)
+    for(size_t i = 0; i < BLOCK_MAX; i++)
     {
-        for(size_t i = 0; i < BLOCK_MAX; i++)
-        {
-            auto temp = mBlocks[i]->mOffset;
-            mBlocks[i]->mOffset.x = -temp.y;
-            mBlocks[i]->mOffset.y = temp.x;
-        }
+        auto temp = mBlocks[i]->mOffset;
+        mBlocks[i]->mOffset.x = -temp.y;
+        mBlocks[i]->mOffset.y = temp.x;
     }
     SetPosition(mPosition);
 }
 
 void TetriMino::RotateRight()
 {
-    if(blockTypes->isRotatable == true)
+    for(size_t i = 0; i < BLOCK_MAX; i++)
     {
-        for(size_t i = 0; i < BLOCK_MAX; i++)
-        {
-            auto temp = mBlocks[i]->mOffset;
-            mBlocks[i]->mOffset.x = temp.y;
-            mBlocks[i]->mOffset.y = -temp.x;
-        }
+        auto temp = mBlocks[i]->mOffset;
+        mBlocks[i]->mOffset.x = temp.y;
+        mBlocks[i]->mOffset.y = -temp.x;
     }
     SetPosition(mPosition);
 }
