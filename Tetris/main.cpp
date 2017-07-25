@@ -173,16 +173,22 @@ void ProcessInput()
     }
     else if(input.GetButtonDown(GLFW_KEY_K))
     {
-        if(gameManager->IsRotatableLeft(*currentMino))
+        if(currentMino->mType != 2)
         {
-            currentMino->RotateLeft();
+            if(gameManager->IsRotatableLeft(*currentMino))
+            {
+                currentMino->RotateLeft();
+            }
         }
     }
     else if(input.GetButtonDown(GLFW_KEY_L))
     {
-        if(gameManager->IsRotatableRight(*currentMino))
+        if(currentMino->mType != 2)
         {
-            currentMino->RotateRight();
+            if(gameManager->IsRotatableRight(*currentMino))
+            {
+                currentMino->RotateRight();
+            }
         }
     }
 }

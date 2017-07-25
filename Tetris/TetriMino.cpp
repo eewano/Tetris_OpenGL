@@ -41,8 +41,8 @@ TetriMino::TetriMino()
 
 TetriMino::TetriMino(Vec2i aPos)
 {
-    //mNextTypeは0で初期化されていないので、コンストラクタ生成時にテトリミノのタイプを
-    //設定しておかないとcassertに引っ掛かる事がある
+    //mNextTypeは0で初期化されていないので、コンストラクタ生成時にテトリミノの
+    //タイプを予め設定しておかないとcassertに引っ掛かる事がある
     UpdateNextType();
     
     //Blockを4つ組み合わせる
